@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<form id="mongoForm">
+    <div class="AddCopy">
+        <h4>租客信息</h4>
+        <div class="form-group">
+             租客姓名
+            <input type="text" class="form-control" th:value="${mo.zkName}" >
+        </div>
+        <div class="form-group">
+            租客练习电话
+            <input type="text" class="form-control"  th:value="${mo.zkPhone}"   >
+        </div>
+        <div class="form-group">
+            租客身份证
+            <input type="text" class="form-control" th:value="${mo.zksfId}" >
+        </div>
+        <div class="form-group">
+            紧急联系人
+            <input type="text" class="form-control" th:value="${mo.jjMan}"  >
+        </div>
+        <div class="form-group">
+            紧急联系人电话
+            <input type="text" class="form-control" th:value="${mo.jjPhone}"  >
+        </div>
+        <h4>合同信息</h4>
+        <div class="form-group">
+            入住房间
+            <input type="text" class="form-control" th:value="${mo.htHome}"  >
+        </div>
+        <div class="form-group">
+            入住房间
+            <input type="text" class="form-control" th:value="${mo.htHome}"  >
+        </div>
+        <div class="form-group">
+            合同开始时间
+            <input type="text" class="form-control date" th:value="${mo.htStartDate}" readonly>
+        </div>
+        <div class="form-group">
+            合同截止时间
+            <input type="text" class="form-control date" th:value="${mo.htEndDate}" readonly>
+        </div>
+        <div class="form-group">
+            共计
+            <input type="text" class="form-control" th:value="${mo.ymd}">
+        </div>
+        <div class="form-group">
+            租金
+            <input type="text" class="form-control" th:value="${mo.htzMoney}">
+        </div>
+        <div class="form-group">
+            压金
+            <input type="text" class="form-control" th:value="${mo.htyMoney}">
+        </div>
+        <div class="form-group">
+            房租支付方式
+            <input type="text" class="form-control" th:value="${mo.fzzffs}" >
+        </div>
+        <h4>费用结算</h4>
+        <div class="form-group">
+             水费
+            <input type="text" class="form-control" th:value="${mo.waterCount}" >
+        </div>
+        <div class="form-group">
+            电费
+            <input type="text" class="form-control" th:value="${mo.electCount}" >
+        </div>
+        <div class="form-group">
+            气费
+            <input type="text" class="form-control" th:value="${mo.gasCount}" >
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+    /* 时间 */
+    $('.date').datetimepicker({
+        language : 'zh-CN',//显示中文
+        format : 'yyyy-mm-dd',//显示格式
+        minView : "month",//设置只显示到月份
+        initialDate : new Date(),//初始化当前日期
+        autoclose : true,//选中自动关闭
+        todayBtn : true
+        //显示今日按钮
+    });
+    })
+</script>
+</html>
