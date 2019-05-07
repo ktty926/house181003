@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+
+<form method="post" id="dsform">
+    <input type="hidden" th:value="${zd.szId}" name="szId">
+    实收金额<input type="text" class="form-control" th:value="${zd.zdmoney}" name="zdmoney">
+    应收金额 :<input type="text" th:value="${zd.zdmoney}" disabled>
+    <br>
+    收款方式 ：<select name="zfFangShi">
+    <option value="1">现金</option>
+    <option value="2">支付宝</option>
+    <option value="3">微信</option>
+    <option value="4">转账</option>
+
+</select>
+    收款时间：<input type="text" id="sj" th:value="${zd.zfdate}"  name="zfdate"/>
+    <br>
+    备注：<textarea name="beizhu" rows="5" cols="60"></textarea>
+
+</form>
