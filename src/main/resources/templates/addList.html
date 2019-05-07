@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+
+    <script  th:src="@{/js/jquery.min.js}"></script>
+    <script  th:src="@{/bootstrap3/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap3/css/bootstrap.css}"></link>
+    <link rel="stylesheet" th:href="@{/js/toastr.min.css}"></link>
+    <link rel="stylesheet" th:href="@{/js/bootstrap-table/bootstrap-table.css}"></link>
+    <link rel="stylesheet" th:href="@{/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css}"></link>
+    <script  th:src="@{/js/toastr.min.js}"></script>
+    <script  th:src="@{/js/bootstrap-table/bootstrap-table.js}"></script>
+    <script  th:src="@{/js/bootstrap-table/locale/bootstrap-table-zh-CN.js}"></script>
+    <script  th:src="@{/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+    <script  th:src="@{/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js}"></script>
+    <script  th:src="@{/js/bootbox/bootbox.all.min.js}"></script>
+    <script  th:src="@{/js/toastr.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/js/toastr.min.css}"></link>
+    <link rel="stylesheet" th:href="@{/js/bootstrap-treeview/bootstrap-treeview.min.css}"></link>
+    <link rel="stylesheet" th:href="@{/js/bootStrap-addTabs/bootstrap.addtabs.css}"></link>
+    <script  th:src="@{/js/bootstrap-treeview/bootstrap-treeview.min.js}"></script>
+    <script  th:src="@{/js/bootStrap-addTabs/bootstrap.addtabs.min.js}"></script>
+    <script  th:src="@{/js/bootstrap-fileinput/js/fileinput.js}"></script>
+    <link rel="stylesheet" th:href="@{/js/bootstrap-fileinput/css/fileinput.css}"></link>
+    <script  th:src="@{/js/uploadify/jquery.uploadify.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/js/uploadify/uploadify.css}"></link>
+
+</head>
+<body>
+
+<form role="form" name="form">
+
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">使用人</label>
+        <div class="col-sm-2">
+            <input type="hidden" id="id" name="id" class="form-control"/>
+
+            <input type="text" id="name" name="name" class="form-control"/>
+        </div><br>
+
+    </div><br>
+        <div class="form-group">
+            <label for="account" class="col-sm-1 control-label">手机号</label>
+            <div class="col-sm-2">
+
+                <input type="text" id="account" name="account" class="form-control"/>
+            </div>
+
+        </div><br>
+
+
+        <!-- 特色 -->
+
+        <div class="form-group">
+            <label for="booktype" class="col-sm-1 control-label">职业类型:</label>
+            <div class="col-sm-2">
+                <select id="booktype" name="jiaoyid" class="form-control">
+                </select>
+            </div>
+
+        </div><br>
+    <div class="form-group">
+        <label for="password" class="col-sm-1 control-label">密码</label>
+        <div class="col-sm-2">
+
+            <input type="text" id="password" name="password" class="form-control"/>
+        </div><br>
+
+    </div><br>
+    </form>
+
+<div class="col-sm-1">
+    <button type="button" class="btn btn-primary btn-lg" onclick="addOwner()">确认</button>
+    </select>
+</div>
+</div>
+
+</body>
+<script th:inline="none">
+    $(function(){
+        selecid();
+
+    })
+
+
+    //修改
+    function openUpdate(id){
+
+        $.ajax({
+            url:'',
+            type:'post',
+            async:false,//同步
+            data:{id:id},
+            dataType:'json',
+            success:function(data) {
+                $("#id").val(data.id);
+
+            }
+        })
+    }
+
+
+
+    function addOwner() {
+        $.ajax({
+            url:'',
+            type:'post',
+            data:$("form").serialize(),
+            dataType:'json',
+            success:function (result) {
+                if (result){
+
+                    location.href="";
+                }
+            },
+            error:function () {
+                alert("保存成功!");
+            }
+        });
+    }
+    function selecid(){
+        $.ajax({
+            url:"",
+            type:'post',
+            data:{},
+            dataType:'json',
+            success:function(data){
+                var html = '<option value="-1">-请选择-</option>';
+                for (var i = 0; i < data.length; i++) {
+                    html += '<option value="'+data[i].id+'">-'+data[i].+'</option>';
+                }
+                $('#booktype').html(html);
+            }
+        })
+    }
+
+
+
+
+</script>
+</html>
