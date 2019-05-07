@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/jquery-1.9.1.min.js"></script>
+    <script src="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <script src="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+
+</head>
+<body>
+
+<form role="form" name="form">
+
+    <div class="form-group">
+        <label for="name" class="col-sm-1 control-label">使用人</label>
+        <div class="col-sm-2">
+            <input type="hidden" id="id" name="id" class="form-control"/>
+
+            <input type="text" id="name" name="name" class="form-control" placeholder="请输入使用人名称"/>
+        </div><br>
+    </div><br>
+    <div class="form-group">
+        <label for="accout" class="col-sm-1 control-label">证号</label>
+        <div class="col-sm-2">
+
+            <input type="text" id="accout" name="accout" class="form-control" placeholder="请输入证号"/>
+        </div><br>
+    </div><br>
+    <div class="form-group">
+        <label for="accoun" class="col-sm-1 control-label">邮箱</label>
+        <div class="col-sm-2">
+
+            <input type="text" id="accoun" name="accoun" class="form-control" placeholder="请输入手机号"/>
+        </div>
+
+    </div><br>
+        <div class="form-group">
+            <label for="account" class="col-sm-1 control-label">邮箱验证:</label>
+            <div class="col-sm-2">
+                <input type="text" id="Verificati"  class="form-control" placeholder="请输入邮箱验证码">
+            </div>
+            <div>
+                <button onclick="selectVerification()" class="btn btn-default" type="button">获取验证码</button>
+            </div>
+        </div>
+    </div><br>
+        <div class="form-group">
+            <label for="account" class="col-sm-1 control-label">手机号</label>
+            <div class="col-sm-2">
+
+                <input type="text" id="account" name="account" class="form-control" placeholder="请输入手机号"/>
+            </div>
+
+        </div><br>
+    <div class="form-group">
+        <label for="account" class="col-sm-1 control-label">手机号验证:</label>
+        <div class="col-sm-2">
+            <input type="text" id="Verification"  class="form-control" placeholder="请输入手机号验证码">
+        </div>
+        <div>
+            <button onclick="selectVerification()" class="btn btn-default" type="button">获取验证码</button>
+        </div>
+    </div>
+
+        <!-- 特色 -->
+
+        <div class="form-group">
+            <label for="booktype" class="col-sm-1 control-label">职业类型:</label>
+            <div class="col-sm-2">
+                <select id="booktype" name="jiaoyid" class="form-control" >
+                </select>
+            </div>
+
+        </div><br><br>
+    <div class="form-group">
+        <label for="password" class="col-sm-1 control-label">密码</label>
+        <div class="col-sm-2">
+
+            <input type="text" id="password" name="password" class="form-control"  placeholder="请输入密码"/>
+        </div><br>
+
+    </div><br>
+    </form>
+
+<div class="col-sm-1">
+    <button type="button" class="btn btn-primary btn-lg" onclick="addOwner()">确认</button>
+    </select>
+</div>
+</div>
+
+</body>
+<script th:inline="none">
+    $(function(){
+        selecid();
+
+    })
+
+
+    //修改
+    function openUpdate(id){
+
+        $.ajax({
+            url:'',
+            type:'post',
+            async:false,//同步
+            data:{id:id},
+            dataType:'json',
+            success:function(data) {
+                $("#id").val(data.id);
+
+            }
+        })
+    }
+
+
+
+    function addOwner() {
+        $.ajax({
+            url:'',
+            type:'post',
+            data:$("form").serialize(),
+            dataType:'json',
+            success:function (result) {
+                if (result){
+
+                    location.href="";
+                }
+            },
+            error:function () {
+                alert("保存成功!");
+            }
+        });
+    }
+    function selecid(){
+        $.ajax({
+            url:"",
+            type:'post',
+            data:{},
+            dataType:'json',
+            success:function(data){
+                var html = '<option value="-1">-请选择-</option>';
+                for (var i = 0; i < data.length; i++) {
+                    html += '<option value="'+data[i].id+'">-'+data[i].name+'</option>';
+                }
+                $('#booktype').html(html);
+            }
+        })
+    }
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/jquery-1.9.1.min.js"></script>
+    <script src="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <script src="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+
+</head>
+<body>
+
+
+<div class="panel-body" style="background:url('/img/2.jpg');background-size:110%;height:950px;">
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">登录页面</h4>
+        </div>
+        <div class="modal-body">
+
+            <form  id="loginForm" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">哈喽</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">欢迎</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="login" class="col-sm-2 control-label">证号:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="login" placeholder="请输入证号">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="login" class="col-sm-2 control-label">密码:</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default glyphicon glyphicon-remove-circle" data-dismiss="modal">关闭</button>
+            <button onclick="login()" type="button" class="btn btn-primary glyphicon glyphicon-check">普通登录</button>
+            <button onclick="reg()" type="button" class="btn btn-default glyphicon glyphicon-ok-sign">邮箱登录</button>
+            <button onclick="kjlogin()" type="button" class="btn btn-default glyphicon glyphicon-phone">手机登录</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
+
+
+</div>
+
+
+</body>
+
+
+<script th:inline="none">
+    function kjlogin(){
+        window.location.href="../page/login"
+    }
+
+
+    function   login(){
+        var  login = $("#login").val();
+        var  password = $("#password").val();
+        $.ajax({
+            url:'',
+            type:'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            data:{
+                login:login,
+                password:password
+            },
+            dataType:'json',
+            success:function(data){
+                if (data==1) {
+                    alert("此手机号未注册");
+                    return;
+                }
+                if (data==2) {
+                    alert("密码不正确");
+                    return;
+                }
+                if (data==0) {
+                    window.location.href="";
+                }
+            }
+        })
+    }
+
+    function reg(){
+        window.location.href="../page/youx"
+    }
+
+
+
+
+</script>
+</html>

@@ -23,4 +23,8 @@ public class PageController {
     public String addList(){
         return "addList";
     }
+    @RequestMapping("index")
+    public String index(){
+        return "index";
+    }
 }
