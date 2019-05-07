@@ -34,10 +34,7 @@ public class SzController {
 
         return service.lsfind(start,pageSize);
     }
-    @RequestMapping("tofindds")
-    public String tofindds(){
-        return "findds";
-    }
+
     @RequestMapping("toqr")
     public ModelAndView toqr(Integer szId){
         ModelAndView mv = new ModelAndView();
