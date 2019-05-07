@@ -44,7 +44,31 @@
 
             <input type="text" id="name" name="name" class="form-control" placeholder="请输入使用人名称"/>
         </div><br>
+    </div><br>
+    <div class="form-group">
+        <label for="accout" class="col-sm-1 control-label">证号</label>
+        <div class="col-sm-2">
 
+            <input type="text" id="accout" name="accout" class="form-control" placeholder="请输入证号"/>
+        </div><br>
+    </div><br>
+    <div class="form-group">
+        <label for="accoun" class="col-sm-1 control-label">邮箱</label>
+        <div class="col-sm-2">
+
+            <input type="text" id="accoun" name="accoun" class="form-control" placeholder="请输入手机号"/>
+        </div>
+
+    </div><br>
+        <div class="form-group">
+            <label for="account" class="col-sm-1 control-label">邮箱验证:</label>
+            <div class="col-sm-2">
+                <input type="text" id="Verificati"  class="form-control" placeholder="请输入邮箱验证码">
+            </div>
+            <div>
+                <button onclick="selectVerification()" class="btn btn-default" type="button">获取验证码</button>
+            </div>
+        </div>
     </div><br>
         <div class="form-group">
             <label for="account" class="col-sm-1 control-label">手机号</label>
@@ -54,7 +78,15 @@
             </div>
 
         </div><br>
-
+    <div class="form-group">
+        <label for="account" class="col-sm-1 control-label">手机号验证:</label>
+        <div class="col-sm-2">
+            <input type="text" id="Verification"  class="form-control" placeholder="请输入手机号验证码">
+        </div>
+        <div>
+            <button onclick="selectVerification()" class="btn btn-default" type="button">获取验证码</button>
+        </div>
+    </div>
 
         <!-- 特色 -->
 
@@ -65,7 +97,7 @@
                 </select>
             </div>
 
-        </div><br>
+        </div><br><br>
     <div class="form-group">
         <label for="password" class="col-sm-1 control-label">密码</label>
         <div class="col-sm-2">
