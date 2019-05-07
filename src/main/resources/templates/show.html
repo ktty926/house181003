@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+
+
+
+
+<link rel="stylesheet" href="/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+<link rel="stylesheet" href="/bootstrap/bootstrap-fileinput/css/fileinput.css">
+<script src="/bootstrap/easyui1.5/jquery.min.js"></script>
+<script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+<script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+<script src="/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+
+<body>
+        <form id="tcform">
+            <select id="zt">
+                <option value="0">--请选择--</option>
+                <option value="1">账单房号</option>
+                <option value="2">收款人</option>
+            </select>
+            <input type="text" class="form-control"  id="cxname">
+            <button type="button" class="btn btn-default"  onclick="search()">搜索</button>
+        </form>
+
+    <table id="redisTab"></table>
+</body>
+
+<script type="text/javascript" >
+
+
+
+
+    $(function (){
+        $("#redisTab").bootstrapTable({
+            url:"/sfk/finddz",
+            method:"post",
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect:true,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect:true,
+            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "comId",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            //发送到服务器的数据编码类型
+            contentType:'application/x-www-form-urlencoded;charset=UTF-8',   //数据编码纯文本  offset=0&limit=5
+            toolbar:'#tabToolBar',   //  工具定义位置
+            columns:[
+                {field:'szId',title:"Id",width:100,
+                    formatter:function(value,row,index){   //  格式化  当前单元格内容
+                        return "<input type='checkbox' value="+value+" name='chk'/>";
+                    }
+                },
+                {field:'szId',title:'ID',width:100},      //  列    field   代表是 后台  传过来的值
+                {field:'room',title:'房间编号',width:100},      //  列    field   代表是 后台  传过来的值
+                {field:'sfren',title:'收付款方',width:100},
+
+                {field:'zdmoney',title:'账单金额',width:100,},
+                {field:'zdType',title:'账单类型',width:100},
+                {field:'sfDate',title:'收付款时间',width:100},
+                {field:'zfFangShi',title:'支付方式',
+                    formatter: function (value,row,index){
+                       var str="";
+                        if (row.zfFangShi==1) {
+                            str="现金";
+                        }
+                        if (row.zfFangShi==2) {
+                            str="支付宝";
+                        }
+                        if (row.zfFangShi==3) {
+                            str="微信";
+                        }
+                        if (row.zfFangShi==4) {
+                            str="转账";
+                        }
+
+                        return str;
+                    },
+                    width:100},
+
+                {field:'crud',title:'操作',width:100,
+                    formatter: function (value,row,index){
+                        var str="";
+                        str="<a href='javascript:tankuang(&quot;"+row.szId+"&quot;)'>确认收款</a>";
+                        str+=" |  <a href='javascript:zctang(&quot;"+row.szId+"&quot;)'>更多</a>";
+
+                        return str;
+
+
+
+                    }
+                }
+            ],
+            //传递参数（*）
+            queryParams: function(params) {
+                var whereParams = {
+                    /*
+                        分页  自定义的参数         默认传 limit（展示几条）    offset（从第几条开始    起始条数）
+                    */
+                    "pageSize":params.limit,
+                    "start":params.offset
+
+                }
+                return whereParams;
+            },
+            //前台--排序字段
+            //sortName:'proPrice',
+            //sortOrder:'desc',
+            //前台--搜索框
+            search:true,
+            //启动回车键做搜索功能
+            searchOnEnterKey:true,
+            //分页方式   后台请求的分页方式
+            sidePagination:'server',
+            pagination: true,                   //是否显示分页（*）
+            pageNum: 2,                       //每页的记录行数（*）
+            pageSize: 2,                       //每页的记录行数（*）
+            pageList: [2, 6, 8,12],        //可供选择的每页的行数（*）
+        });
+    })
+
+
+    function  search(){
+        $("#redisTab").bootstrapTable("refresh",{
+            "query":{
+                'cxname':$("#cxname").val(),
+                'zt':$("#zt").val(),
+            }
+        });
+
+    }
+
+
+    function  comment(goodId){
+        //  复选框  ID
+        location.href="/zy/tocomm.do?goodId="+goodId;
+    }
+
+
+    function tankuang(szId){
+        dialog("/sfk/totk?szId="+szId,"/sfk/updateDz","确认收款");
+       }
+
+
+    function zctang(szId){
+        dialog2("/sfk/zctang?szId="+szId,"确认收款",szId);
+    }
+
+
+
+    /*
+ *发送ajax请求获取jsp页面内容
+ */
+    function getJspHtml(urlStr){
+        var  jspHtml = "";
+//		 async  (默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。
+        //注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
+        $.ajax({
+            url:urlStr,
+            type:'post',
+            //同步的ajax
+            async:false,
+            success:function(data){
+                //alert(data);//data--addProduct.jsp页面内容
+                jspHtml = data;
+            },
+            error:function(){
+                bootbox.alert("ajax失败");
+            }
+        });
+        return jspHtml;
+    }
+
+    function  dialog(HTMLurl,submitUrl,title){
+
+        var dialog = bootbox.dialog({
+            title: title,
+            message: getJspHtml(HTMLurl),   //调用方法
+            buttons:{
+                "save":{
+                    label: '保存',
+                    //自定义样式
+                    className: "btn-success",
+                    callback: function() {
+                        $.ajax({
+                            url:submitUrl,
+                            type:'post',
+                            data:$("#mongoForm").serialize(),
+                            success:function(data){
+                                bootbox.alert("保存成功");
+                                $("#redisTab").bootstrapTable('refresh');
+                            },
+                            error:function(){
+                                bootbox.alert("ajax失败");
+                            }
+                        });
+                    }
+                },
+                "unSave":{
+                    label: '取消',
+                    //自定义样式
+                    className: "btn-info",
+                    callback: function() {
+                        // return false;  //dialog不关闭
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+    /*
+*发送ajax请求获取jsp页面内容
+*/
+    function getJspHtml2(urlStr){
+        var  jspHtml = "";
+//		 async  (默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。
+        //注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
+        $.ajax({
+            url:urlStr,
+            type:'post',
+            //同步的ajax
+            async:false,
+            success:function(data){
+                //alert(data);//data--addProduct.jsp页面内容
+                jspHtml = data;
+            },
+            error:function(){
+                bootbox.alert("ajax失败");
+            }
+        });
+        return jspHtml;
+    }
+
+    function  dialog2(HTMLurl,title,szId){
+
+        var dialog = bootbox.dialog({
+            title: title,
+            message: getJspHtml2(HTMLurl),   //调用方法
+            buttons:{
+                "save":{
+                    label: '确认收款',
+                    //自定义样式
+                    className: "btn-success",
+                    callback: function() {
+                        tankuang(szId)
+                    }
+                },
+                "unSave":{
+                    label: '取消',
+                    //自定义样式
+                    className: "btn-info",
+                    callback: function() {
+                        // return false;  //dialog不关闭
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+</script>
+</html>
