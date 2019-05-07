@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.fxlMapper">
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from t_tenant where 1=1
+        <if test="tenName!=null and tenName!='' ">
+          and tenName = #{tenName}
+        </if>
+        <if test="tenSite!=null and tenSite!='' ">
+          and tenSite = #{tenSite}
+        </if>
+    </select>
+
+    <select id="findTen" resultType="com.jk.model.Tenant">
+        select * from  t_tenant where 1=1
+        <if test="tenName!=null and tenName!='' ">
+            and tenName = #{tenName}
+        </if>
+        <if test="tenSite!=null and tenSite!='' ">
+            and tenSite = #{tenSite}
+        </if>
+        <if test="start!=null and rows!=null">
+            LIMIT #{start},#{rows}
+        </if>
+    </select>
+    <!--<select id="findPL" resultType="com.jk.model.Pl">-->
+    <!--select * from t_pl where goodsid = #{id}-->
+    <!--<if test="comments!=null and comments!='' ">-->
+    <!--and comments like concat(concat('%',#{comments}),'%')-->
+    <!--</if>-->
+    <!--&lt;!&ndash;<if test="startDate!=null and startDate!='' ">&ndash;&gt;-->
+    <!--&lt;!&ndash;// and to_date(commentDate,'yyyy-MM-dd') &gt;= to_date(#{startDate},'yyyy-MM-dd')&ndash;&gt;-->
+    <!--&lt;!&ndash;and str_to_date(commentDate,'%Y-%m-%d') &gt;= str_to_date(#{startDate},'%Y-%m-%d')&ndash;&gt;-->
+    <!--&lt;!&ndash;</if>&ndash;&gt;-->
+    <!--<if test="start!=null and rows!=null">-->
+    <!--LIMIT #{start},#{rows}-->
+    <!--</if>-->
+    <!--</select>-->
+
+    <!--<select id="queryPL" resultType="com.jk.model.Pl">-->
+    <!--select count(1) from t_pl where goodsid = #{id}-->
+    <!--<if test="comments!=null and comments!='' ">-->
+    <!--and comments like concat(concat('%',#{comments}),'%')-->
+    <!--</if>-->
+    <!--<if test="startDate!=null and startDate!='' ">-->
+    <!--and to_date(commentDate,'yyyy-MM-dd') &gt;= to_date(#{startDate},'yyyy-MM-dd')-->
+    <!--</if>-->
+    <!--<if test="endDate!=null and endDate!='' ">-->
+    <!--and to_date(commentDate,'yyyy-MM-dd') &lt;= to_date(#{endDate},'yyyy-MM-dd')-->
+    <!--</if>-->
+    <!--</select>-->
+
+    <!--<insert id="addGoods">-->
+    <!--insert into t_pl-->
+    <!--(comments,commentsName,commentsLevel,commentsStars,commentDate,goodsid)-->
+    <!--VALUES-->
+    <!--(#{comments},#{commentsName},#{commentsLevel},#{commentsStars},#{commentDate},#{goodsid})-->
+    <!--</insert>-->
+    <!--<select id="findUserList" resultType="com.jk.bean.UserBean">-->
+    <!--SELECT * FROM t_user WHERE id = #{userId}-->
+    <!--</select>-->
+    <!--<select id="findUserCount" parameterType="map" resultType="int">-->
+    <!--SELECT COUNT(id) FROM t_user-->
+    <!--<include refid="whereSql"></include>-->
+    <!--</select>-->
+    <!--<select id="findUserPageList" resultType="com.jk.bean.UserBean">-->
+    <!--SELECT * FROM t_user-->
+    <!--<include refid="whereSql"></include>-->
+    <!--LIMIT #{start},#{rows}-->
+    <!--</select>-->
+    <!--<sql id="whereSql">-->
+    <!--<where>-->
+    <!--<if test="userName != null and userName != ''">-->
+    <!--AND userName LIKE '%${userName}%'-->
+    <!--</if>-->
+    <!--</where>-->
+    <!--</sql>-->
+    <!--<insert id="saveUser" parameterType="com.jk.bean.UserBean">-->
+    <!--INSERT INTO t_user (-->
+    <!--userName,-->
+    <!--userPassword,-->
+    <!--userAge,-->
+    <!--imgId-->
+    <!--)-->
+    <!--VALUES-->
+    <!--(-->
+    <!--#{userName},-->
+    <!--#{userPassword},-->
+    <!--#{userAge},-->
+    <!--#{imgId}-->
+    <!--)-->
+    <!--</insert>-->
+    <!--<update id="upUser" parameterType="com.jk.bean.UserBean" >-->
+    <!--UPDATE t_user-->
+    <!--SET userName = #{userName},-->
+    <!--userPassword = #{userPassword},-->
+    <!--userAge = #{userAge},-->
+    <!--imgId = #{imgId}-->
+    <!--WHERE-->
+    <!--id = #{id}-->
+    <!--</update>-->
+</mapper>
