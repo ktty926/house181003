@@ -42,7 +42,7 @@
         <div class="col-sm-2">
             <input type="hidden" id="id" name="id" class="form-control"/>
 
-            <input type="text" id="name" name="name" class="form-control"/>
+            <input type="text" id="name" name="name" class="form-control" placeholder="请输入使用人名称"/>
         </div><br>
 
     </div><br>
@@ -50,7 +50,7 @@
             <label for="account" class="col-sm-1 control-label">手机号</label>
             <div class="col-sm-2">
 
-                <input type="text" id="account" name="account" class="form-control"/>
+                <input type="text" id="account" name="account" class="form-control" placeholder="请输入手机号"/>
             </div>
 
         </div><br>
@@ -61,7 +61,7 @@
         <div class="form-group">
             <label for="booktype" class="col-sm-1 control-label">职业类型:</label>
             <div class="col-sm-2">
-                <select id="booktype" name="jiaoyid" class="form-control">
+                <select id="booktype" name="jiaoyid" class="form-control" >
                 </select>
             </div>
 
@@ -70,7 +70,7 @@
         <label for="password" class="col-sm-1 control-label">密码</label>
         <div class="col-sm-2">
 
-            <input type="text" id="password" name="password" class="form-control"/>
+            <input type="text" id="password" name="password" class="form-control"  placeholder="请输入密码"/>
         </div><br>
 
     </div><br>
@@ -134,7 +134,7 @@
             success:function(data){
                 var html = '<option value="-1">-请选择-</option>';
                 for (var i = 0; i < data.length; i++) {
-                    html += '<option value="'+data[i].id+'">-'+data[i].+'</option>';
+                    html += '<option value="'+data[i].id+'">-'+data[i].name+'</option>';
                 }
                 $('#booktype').html(html);
             }
