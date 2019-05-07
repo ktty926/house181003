@@ -27,4 +27,8 @@ public class PageController {
     public String index(){
         return "index";
     }
+    @RequestMapping("tofindds")
+    public String tofindds(){
+        return "findds";
+    }
 }

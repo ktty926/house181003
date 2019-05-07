@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- mybatis框架只有接口 没有实现类
+     mybatis的映射文件就相当于是接口的实现类
+               主要用来编写sql语句
+     mapper 需要与映射接口对应
+     namespace 配置类的全限定名
+ -->
+<mapper namespace="com.jk.mapper.yft.SzMapper" >
+    <select id="finddsCount" resultType="Long">
+        select count(1) from  fukuang where dsz=2 and lszt=1
+        <if test="cxname!=null and cxname!='' and zt==1">
+            and room like concat('%',concat(#{cxname},'%'))
+        </if>
+        <if test="cxname!=null and cxname!='' and zt==2">
+            and sfren like concat('%',concat(#{cxname},'%'))
+        </if>
+    </select>
+    <select id="findds" resultType="com.jk.model.yft.ZdModel">
+        select * from fukuang where dsz=2 and lszt=1
+        <if test="cxname!=null and cxname!='' and zt==1">
+            and room like concat('%',concat(#{cxname},'%'))
+        </if>
+        <if test="cxname!=null and cxname!='' and zt==2">
+            and sfren like concat('%',concat(#{cxname},'%'))
+        </if>
+        limit #{start},#{pageSize}
+    </select>
+    <select id="findOneById" resultType="com.jk.model.yft.ZdModel">
+        select * from fukuang where szid=#{szId}
+    </select>
+    <update id="updatezd" parameterType="com.jk.model.yft.ZdModel">
+        update fukuang set zfFangShi =#{zfFangShi} ,zfdate=#{zfdate},beizhu=#{beizhu} ,dsz=1 where szid=#{szId}
+    </update>
+    <select id="lsfindCount" resultType="Long">
+        select count(1) from  fukuang where dsz=1
+    </select>
+    <select id="lsfind" resultType="com.jk.model.yft.ZdModel">
+         select * from fukuang where dsz=1  limit #{start},#{pageSize}
+    </select>
+</mapper>

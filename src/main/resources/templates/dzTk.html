@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<form id="mongoForm">
+    <input type="hidden"   name="szId"  th:value="${zd.szId}">
+    实付金额:<input type="text"  class="form-control" th:value="${zd.zdmoney}"  name="zdmoney"  placeholder="实付金额"><br>
+    应付金额:<input type="text"  class="form-control" th:value="${zd.zdmoney}"  name="zdmoney" width="100"  placeholder="实付金额" disabled><br>
+    付款方式:<select name="zfFangShi">
+                <option value="0" selected>现金
+                <option value="1">现金
+                <option value="2">支付宝
+                <option value="3">微信
+                <option value="4">转账
+            </select>
+
+    付款时间<input class='Wdate' type="text" id="proDate" name="zfdate" th:value="${zd.zfdate}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /><br>
+
+    项目简介<textarea name="beizhu" rows="" cols=""></textarea><br>
+
+
+    <!-- <input class='Wdate' type="text" name="createTime" onclick="WdatePicker  ({dateFmt:'yyyy-MM-dd'})"> -->
+</form>

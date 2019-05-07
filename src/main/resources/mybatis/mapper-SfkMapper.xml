@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.zs.SfkMapper">
+
+    <select id="getCount"  resultType="long">
+          select count(1) from fukuang where dsz=2 and lszt=2
+        <if test="cxname!=null and cxname!='' and zt==1">
+            and room = #{cxname}
+        </if>
+        <if test="cxname!=null and cxname!='' and zt==2">
+            and sfren = #{cxname}
+        </if>
+      </select>
+
+
+    <select id="finddz"  resultType="com.jk.model.yft.ZdModel">
+        select * from fukuang where dsz=2 and lszt=2
+        <if test="cxname!=null and cxname!='' and zt==1">
+            and room = #{cxname}
+        </if>
+        <if test="cxname!=null and cxname!='' and zt==2">
+            and sfren = #{cxname}
+        </if>
+          limit #{start},#{pageSize}
+      </select>
+
+    <update id="updateDz">
+        update fukuang set zdmoney=#{zdmoney},zfFangShi=#{zfFangShi},
+        zfdate=#{zfdate},beizhu=#{beizhu} where szId=#{szId}
+
+    </update>
+</mapper>
