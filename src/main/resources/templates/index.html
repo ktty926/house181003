@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="/bootstrap/easyui1.5/jquery.min.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/jquery-1.9.1.min.js"></script>
+    <script src="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <script src="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!-- 头部 class="navbar-brand"  -->
+            <div style="float: left;">
+                <img src="/log.png" height="46px">
+            </div>
+
+
+            <a class="navbar-brand" href="">58同城有限公司内部管理系统</a>
+        </div>
+
+        <div class="navbar-brand pull-right">
+
+            <font color="white" size="2px">
+                欢迎您，
+                <span id="userName"></span>
+            </font>
+
+            <button  onClick="remove()" type="button" class="btn">注销</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div id="myTree"></div>
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-10">
+            <div id="myTabs">
+                <!-- 新选项卡 -->
+                <ul class="nav nav-tabs" id="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#home" role="tab" data-toggle="tab">首页</a>
+                    </li>
+                </ul>
+                <!-- 选项卡下内容 -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        欢迎登陆
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script>
+    $(function(){
+        initTree();
+    });
+
+    //左侧树
+    function initTree(){
+        $.ajax({
+            url:'../getTree',
+            type:'post',
+            dataType:'json',
+            success:function(data){
+
+                $('#myTree').treeview({
+                    data:data,
+                    levels:0,
+                    onNodeSelected:function(event, node) {
+                        $.addtabs({iframeHeight:$(window).height()-160});
+                        $.addtabs.add({
+                            id:node.id,
+                            title:node.text,
+                            url:node.href
+                        });
+                    }
+                })
+            }
+        })
+    }
+
+</script>
+
+</html>
