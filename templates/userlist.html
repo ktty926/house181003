@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="/bootstrap/easyui1.5/jquery.min.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+</head>
+<body>
+<div id="toolbar" class="panel panel-info">
+    <button class="btn btn-info" onclick="addUser()">添加子账号</button>
+</div>
+<div class="container-fluid" id="userTable"></div>
+
+</body>
+<script type="text/javascript">
+    //新增
+    function addUser(){
+      location.href="/page/addUser";
+    }
+
+    //查询
+    $(function () {
+        initUser();
+    })
+
+    function initUser() {
+        $("#userTable").bootstrapTable({
+            url: '/user/findUserList',
+            method: 'post',
+            contentType: 'application/x-www-form-urlencoded',//post请求按照表单方式
+            pagination:true, //是否展示分页
+            pageList:[5, 10, 20, 50],//分页组件
+            pageNumber:1,
+            pageSize:5,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,
+            queryParams:function(){
+                return {
+                    page: this.pageNumber,
+                    rows: this.pageSize
+                };
+            },
+            columns: [
+                {field: 'name', title: '使用人'},
+                {field: 'account', title: '账号'},
+                {field : 'phone',title : '手机号'},
+                {field : 'positionName',title : '职位'},
+                {field : 'id',title : '最后登录时间'},
+                {field: 'id111', title: '操作', formatter: function (value, row, index) {
+                        return "<a href='javascript:update(" + row.id + ")'>修改</a> | <a href='javascript:del(" + row.id + ")'>删除</a>";
+                  }
+                }
+            ]
+        })
+    }
+//修改
+    function update(id){
+     location.href="/page/userDialog?id="+id;
+    }
+
+
+</script>
+</html>

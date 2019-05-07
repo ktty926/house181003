@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jk.mapper.mapper_chh.UserMapper_chh">
+<!--分页查用户-->
+    <select id="getCount" resultType="long">
+        select count(1) from t_user
+    </select>
+  <select id="findUserList" parameterType="map"  resultType="com.jk.bean.user_chh.UserBean" >
+   select tu.*,tp.name as positionName from t_user tu
+           left join t_position tp on tu.position=tp.id
+        limit #{startIndext},#{endIndext}
+  </select>
+<!--用户新增-->
+    <insert id="saveUserToSql" parameterType="com.jk.bean.user_chh.UserBean">
+    insert  into t_user(name,account,phone,position,password,email)
+    values (#{name},#{account},#{phone},#{position},#{password},#{email})
+    </insert>
+<!--根据邮箱查用户-->
+    <select id="findUserByUserEmail" parameterType="string" resultType="com.jk.bean.user_chh.UserBean">
+       select * from t_user where email=#{value}
+    </select>
+<!--根据手机号查用户-->
+<select id="findUserByphoneNumber" parameterType="string" resultType="com.jk.bean.user_chh.UserBean">
+   select * from t_user where phone=#{value}
+</select>
+
+    <!--修改用户-->
+    <update id="updateUserToSql" parameterType="com.jk.bean.user_chh.UserBean" >
+   update t_user set name=#{name},account=#{account},phone=#{phone},position=#{position},
+   password=#{password},email=#{email} where id=#{id}
+
+    </update>
+
+    <!--根据id 查用户-->
+<select id="findUserById" parameterType="integer" resultType="com.jk.bean.user_chh.UserBean">
+   select * from t_user where id=#{value}
+</select>
+
+    <!--查询职位-->
+    <select id="findPositionList" resultType="com.jk.bean.user_chh.Position">
+        select * from t_position
+    </select>
+<!--根据账号查用户-->
+    <select id="findUserByAccount" parameterType="string" resultType="com.jk.bean.user_chh.UserBean">
+        select * from t_user where account = #{value}
+    </select>
+
+
+
+
+
+</mapper>
