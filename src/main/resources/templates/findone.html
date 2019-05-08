@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-账单房号<input type="text" th:value="${zd.room}" disabled><br/>
-付款方<input type="text" th:value="${zd.sfren}" disabled><br/>
-账单金额 <input type="text" th:value="${zd.zdmoney}" disabled><br/>
-账单类型 <input type="text" th:value="${zd.zdType}" disabled><br/>
-账单时效 <input type="text" th:value="${zd.startdate}" disabled>至<input type="text" th:value="${zd.entdate}" disabled><br/>
-预计付款时间<input type="text" th:value="${zd.sfDate}" disabled><br/>
+<table>
+    <tr>
+        <td>账单房号：<span th:text="${zd.room}"></span></td>
+        <td>&nbsp;&nbsp;&nbsp;付款方：<span th:text="${zd.sfren}"></span></td>
+
+    </tr>
+    <tr>
+        <td>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td>账单金额：<span th:text="${zd.zdmoney}"></span></td>
+        <td>&nbsp;&nbsp;&nbsp;账单类型：<span th:text="${zd.zdType}"></span></td>
+
+    </tr>
+    <tr>
+        <td>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td>账单时效：<span th:text="${zd.startdate}"></span>至<span th:text="${zd.entdate}"></span></td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td>预计付款时间：<span th:text="${zd.sfString}"></span></td>
+        <td></td>
+
+    </tr>
+</table>

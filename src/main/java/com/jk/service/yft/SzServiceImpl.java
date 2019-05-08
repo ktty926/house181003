@@ -35,9 +35,9 @@ public class SzServiceImpl implements SzService {
     }
 
     @Override
-    public HashMap<String, Object> lsfind(Integer start, Integer pageSize) {
+    public HashMap<String, Object> lsfind(Integer start, Integer pageSize,ZdModel zd) {
         Long count = mapper.lsfindCount();
-        List<ZdModel> list=mapper.lsfind(start,pageSize);
+        List<ZdModel> list=mapper.lsfind(start,pageSize,zd.getMindate(),zd.getMaxdate());
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("rows",list);
         map.put("total",count);
@@ -54,5 +54,16 @@ public class SzServiceImpl implements SzService {
     @Override
     public Double findsrByZt() {
         return mapper.findsr();
+    }
+
+    @Override
+    public void addls(ZdModel zd) {
+        mapper.addls(zd);
+    }
+
+    @Override
+    public Double getds() {
+
+        return mapper.getds();
     }
 }

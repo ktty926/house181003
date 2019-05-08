@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<head xmlns:th="http://www.springframework.org/schema/jdbc">
+    <meta charset="UTF-8">
+    <title>title</title>
+
+
+
+</head>
+<div class="container-fluid">
+    <form id="SzlsForm" class="form-horizontal">
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">账单信息</label>
+        </div>
+        <div class="form-group">
+            <label for="url" class="col-sm-2 control-label">账单所属</label>
+            <div class="col-sm-4">
+                <input type="text" id="url" name="room" class="form-control">
+            </div>
+            <label for="zjtype" class="col-sm-2  control-label">资金流向</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="zjtype"  name="lszt" >
+                    <option value="1">收入</option>
+                    <option value="2">支出</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="money" class="col-sm-2 control-label">账单金额</label>
+            <div class="col-sm-4">
+                <input type="text" id="money" name="zdmoney" class="form-control">
+                <span>小数点后保留一位</span>
+            </div>
+            <label for="name" class="col-sm-2  control-label">付款/收款方</label>
+            <div class="col-sm-4">
+                <input type="text" id="name" name="sfren" class="form-control">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sfmoney" class="col-sm-2 control-label">实付金额</label>
+            <div class="col-sm-4">
+                <input type="text" id="sfmoney" name="sfmoney" class="form-control"><span>小数点后保留一位</span>
+            </div>
+            <label for="zdtype" class="col-sm-2  control-label">账单类型</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="zdtype"  name="zdType" >
+                    <option value="租金">租金</option>
+                    <option value="水费">水费</option>
+                    <option value="电费">电费</option>
+                    <option value="押金">押金</option>
+                    <option value="物业费">物业费</option>
+                    <option value="维修费">维修费</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="starttime" class="col-sm-2 control-label">预计收款时间</label>
+            <div class="col-sm-4">
+                <input type="text" id="starttime" name="sfDate" class="form-control date">
+            </div>
+        </div>
+        <div class="divider"></div>
+        <hr class="simple" color="#6f5499" />
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">支付信息</label>
+        </div>
+        <div class="form-group">
+            <label for="zftype" class="col-sm-2 control-label">支付方式</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="zftype"  name="zfFangShi" >
+                    <option value="1">现金</option>
+                    <option value="2">支付宝</option>
+                    <option value="3">微信</option>
+                    <option value="4">转账</option>
+
+
+                </select>
+            </div>
+            <label for="endtime" class="col-sm-2 control-label">支付时间</label>
+            <div class="col-sm-4">
+                <input type="text" id="endtime" name="zfdate" th:value="${format}" class="form-control date">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="beizhu" class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="3" id="beizhu" name="beizhu"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid" id="mydiv">
+    <table id="lsTable"></table>
+</div>
+
+
+

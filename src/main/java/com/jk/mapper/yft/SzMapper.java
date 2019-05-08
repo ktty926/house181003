@@ -20,11 +20,15 @@ public interface SzMapper {
 
     Long lsfindCount();
 
-    List<ZdModel> lsfind(@Param("start") Integer start,@Param("pageSize") Integer pageSize);
+    List<ZdModel> lsfind(@Param("start") Integer start,@Param("pageSize") Integer pageSize,@Param("mindate")String mindate,@Param("maxdate")String maxdate);
     //求已确认支出
     @Select("select sum(zdmoney) from fukuang where dsz=1 and lszt=2")
     Double findzc();
     //求已确认收入
     @Select("select sum(zdmoney) from fukuang where dsz=1 and lszt=1")
     Double findsr();
+
+    void addls(ZdModel zd);
+    @Select("select sum(zdmoney) from fukuang where dsz=2 and lszt=1")
+    Double getds();
 }

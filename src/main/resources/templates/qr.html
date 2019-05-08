@@ -8,8 +8,8 @@
 
 <form method="post" id="dsform">
     <input type="hidden" th:value="${zd.szId}" name="szId">
-    实收金额<input type="text" class="form-control" th:value="${zd.zdmoney}" name="zdmoney">
-    应收金额 :<input type="text" th:value="${zd.zdmoney}" disabled>
+    实收金额<input type="text" class="form-control" th:value="${zd.zdmoney}" name="sfmoney">
+    账单金额：<span th:text="${zd.zdmoney}"></span>
     <br>
     收款方式 ：<select name="zfFangShi">
     <option value="1">现金</option>

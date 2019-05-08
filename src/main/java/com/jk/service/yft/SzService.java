@@ -11,9 +11,13 @@ public interface SzService {
 
     void updatezd(ZdModel zd);
 
-    HashMap<String, Object> lsfind(Integer start, Integer pageSize);
+    HashMap<String, Object> lsfind(Integer start, Integer pageSize,ZdModel zd);
 
     Double findzcByZt();
 
     Double findsrByZt();
+
+    void addls(ZdModel zd);
+
+    Double getds();
 }

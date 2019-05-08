@@ -17,7 +17,12 @@
         </if>
     </select>
     <select id="findds" resultType="com.jk.model.yft.ZdModel">
-        select * from fukuang where dsz=2 and lszt=1
+        select szId,room, sfren,
+        zdMoney, zdType,
+        sfDate, zfFangshi,
+        dsz, lszt, beizhu,
+        date_format(zfdate, '%Y-%m-%d') as zfdate, startdate,
+        entdate, sfmoney from fukuang where dsz=2 and lszt=1
         <if test="cxname!=null and cxname!='' and zt==1">
             and room like concat('%',concat(#{cxname},'%'))
         </if>
@@ -27,15 +32,53 @@
         limit #{start},#{pageSize}
     </select>
     <select id="findOneById" resultType="com.jk.model.yft.ZdModel">
-        select * from fukuang where szid=#{szId}
+        select szId,room, sfren,
+         zdMoney, zdType,
+         sfDate, zfFangshi,
+          dsz, lszt, beizhu,
+           date_format(zfdate, '%Y-%m-%d') as zfdate, startdate,
+            entdate, sfmoney from fukuang where szid=#{szId}
     </select>
     <update id="updatezd" parameterType="com.jk.model.yft.ZdModel">
-        update fukuang set zfFangShi =#{zfFangShi} ,zfdate=#{zfdate},beizhu=#{beizhu} ,dsz=1 where szid=#{szId}
+        update fukuang set sfmoney=#{sfmoney},zfFangShi =#{zfFangShi} ,zfdate=str_to_date(#{zfdate}, '%Y-%m-%d'),beizhu=#{beizhu} ,dsz=1 where szid=#{szId}
     </update>
     <select id="lsfindCount" resultType="Long">
         select count(1) from  fukuang where dsz=1
+        <if test="mindate!=null and mindate!='' ">
+            and zfdate &gt;=str_to_date(#{mindate}, '%Y-%m-%d')
+        </if>
+        <if test="maxdate!=null and maxdate!='' ">
+            and zfdate &lt;=str_to_date(#{maxdate}, '%Y-%m-%d')
+        </if>
     </select>
     <select id="lsfind" resultType="com.jk.model.yft.ZdModel">
-         select * from fukuang where dsz=1  limit #{start},#{pageSize}
+         select szId,room, sfren,
+         zdMoney, zdType,
+         sfDate, zfFangshi,
+          dsz, lszt, beizhu,
+           date_format(zfdate, '%Y-%m-%d') as zfdate, startdate,
+            entdate, sfmoney from fukuang where dsz=1
+             <if test="mindate!=null and mindate!='' ">
+             and zfdate &gt;=str_to_date(#{mindate}, '%Y-%m-%d')
+             </if>
+            <if test="maxdate!=null and maxdate!='' ">
+            and zfdate &lt;=str_to_date(#{maxdate}, '%Y-%m-%d')
+            </if>
+             limit #{start},#{pageSize}
     </select>
+    <insert id="addls" parameterType="com.jk.model.yft.ZdModel">
+        INSERT INTO fukuang
+        (room, sfren,
+         zdMoney, zdType,
+         sfDate, zfFangshi,
+          dsz, lszt, beizhu,
+           zfdate, startdate,
+            entdate, sfmoney) VALUES
+            (#{room}, #{sfren},
+         #{zdmoney}, #{zdType},
+         #{sfDate}, #{zfFangShi},
+          1, #{lszt}, #{beizhu},
+           str_to_date(#{zfdate}, '%Y-%m-%d'), #{startdate},
+            #{entdate}, #{sfmoney})
+    </insert>
 </mapper>

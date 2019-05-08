@@ -29,13 +29,15 @@ public class SzController {
     //收支流水查询
     @RequestMapping("lsfind")
     @ResponseBody
-    public HashMap<String , Object> lsfind(Integer start,Integer pageSize){
+    public HashMap<String , Object> lsfind(Integer start,Integer pageSize,ZdModel zd){
 
 
-        return service.lsfind(start,pageSize);
+        return service.lsfind(start,pageSize,zd);
     }
     @RequestMapping("tofindds")
-    public String tofindds(){
+    public String tofindds(Model model){
+        Double ds=service.getds();
+        model.addAttribute("ds" , ds);
         return "findds";
     }
     @RequestMapping("toqr")
@@ -82,8 +84,38 @@ public class SzController {
     public ModelAndView tolscx(Integer szId){
         ModelAndView mv = new ModelAndView();
         ZdModel zd=service.findOneById(szId);
+        SimpleDateFormat sim =new SimpleDateFormat("yyyy-MM-dd");
+        zd.setSfString(sim.format(zd.getSfDate()));
+        Integer zfFangShi = zd.getZfFangShi();
+        String str="";
+        if(zfFangShi==1){
+            str="现金";
+        }
+        if(zfFangShi==2){
+            str="支付宝";
+        }
+        if(zfFangShi==3){
+            str="微信";
+        }
+        if(zfFangShi==4){
+            str="转账";
+        }
+        zd.setZffs(str);
         mv.setViewName("lscx");
         mv.addObject("zd",zd);
         return mv;
+    }
+    @RequestMapping("toaddls")
+    public String toaddls(Model model){
+        SimpleDateFormat sim=new SimpleDateFormat("yyyy-MM-dd");
+        String format = sim.format(new Date());
+        model.addAttribute("format",format);
+        return "addls";
+    }
+    @RequestMapping("addls")
+    @ResponseBody
+    public String addls(ZdModel zd){
+        service.addls(zd);
+        return null;
     }
 }

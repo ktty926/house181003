@@ -18,9 +18,16 @@
 <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
 <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
 <body>
+<form id="tcform">
+<input type="date" id="mindate">至<input type="date" id="maxdate">
+    <button type="button" class="btn btn-default" onclick="searcha()">搜索</button>
+</form>
+<br>
 收入：<span id="srspan"></span>
 支出：<span id="zcspan"></span>
 总利润：<span id="lrspan"></span>
+<br>
+<button type="button" class="btn btn-default" onclick="addtk()">添加流水</button>
 <table id="lsfindtable"></table>
 
 
@@ -116,6 +123,8 @@
                     */
                     "pageSize":params.limit,
                     "start":params.offset,
+                    'mindate':$("#mindate").val(),
+                    'maxdate':$("#maxdate").val(),
                     //"pro_name":params.search,//精确搜索产品名称
                 }
                 return whereParams;
@@ -137,6 +146,15 @@
 
 
     })
+    function  searcha(){
+        $("#lsfindtable").bootstrapTable("refresh",{
+            "query":{
+                'mindate':$("#mindate").val(),
+                'maxdate':$("#maxdate").val(),
+            }
+        });
+
+    }
     function findgd(szId){
 
         dialog("/yftzd/tolscx?szId="+szId,"流水详情");
@@ -179,6 +197,64 @@
             }
         });
     }
+    function getJspHtml2(urlStr){
+        var  jspHtml = "";
+//		 async  (默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。
+        //注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
+        $.ajax({
+            url:urlStr,
+            type:'post',
+            //同步的ajax
+            async:false,
+            success:function(data){
+                //alert(data);//data--addProduct.jsp页面内容
+                jspHtml = data;
+            },
+            error:function(){
+                bootbox.alert("ajax失败");
+            }
+        });
+        return jspHtml;
+    }
 
+    function  dialog2(HTMLurl,submitUrl,title){
+
+        var dialog = bootbox.dialog({
+            title: title,
+            message: getJspHtml2(HTMLurl),   //调用方法
+            buttons:{
+                "save":{
+                    label: '保存',
+                    //自定义样式
+                    className: "btn-success",
+                    callback: function() {
+                        $.ajax({
+                            url:submitUrl,
+                            type:'post',
+                            data:$("#SzlsForm").serialize(),
+                            success:function(data){
+                                bootbox.alert("保存成功");
+                                location.reload();
+                            },
+                            error:function(){
+                                bootbox.alert("ajax失败");
+                            }
+                        });
+                    }
+                },
+                "unSave":{
+                    label: '取消',
+                    //自定义样式
+                    className: "btn-info",
+                    callback: function() {
+                        // return false;  //dialog不关闭
+                    }
+                }
+            }
+        });
+    }
+    function addtk(){
+        dialog2("/yftzd/toaddls","/yftzd/addls","添加流水");
+    }
 </script>
 </html>

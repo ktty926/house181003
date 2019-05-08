@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -27,7 +27,7 @@
     <input type="text" class="form-control"  id="cxname">
     <button type="button" class="btn btn-default" onclick="search()">搜索</button>
 </form>
-
+待收总额：<span th:text="${ds}"></span>
 <table id="finddstable"></table>
 <input type="button" value="弹框" onclick="tankuang()">
 </body>
