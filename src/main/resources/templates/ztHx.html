@@ -7,20 +7,79 @@
 <body>
 <form id="mongoForm">
    <input type="hidden"   name="szId"  th:value="${zd.szId}">
-    账单房号:<input type="text"  class="form-control" th:value="${zd.room}"  name="room"  placeholder="账单房号"><br>
+    <!--账单房号:<span th:text="${zd.room}"></span><br>
+    &lt;!&ndash;<input type="text"  class="form-control" th:value="${zd.room}"  name="room"  placeholder="账单房号"><br>
+&ndash;&gt;
+    账单金额:<span th:text="${zd.zdmoney}"></span><br>
+    &lt;!&ndash;<input type="text"  class="form-control" th:value="${zd.zdmoney}"  name="zdmoney"  placeholder="实付金额">&ndash;&gt;<br>
 
-    账单金额:<input type="text"  class="form-control" th:value="${zd.zdmoney}"  name="zdmoney"  placeholder="实付金额"><br>
-    账单类型:<input type="text"  class="form-control" th:value="${zd.zdType}"  name="zdType" width="100"  placeholder="账单类型"><br>
+    账单类型:<span th:text="${zd.zdType}"></span><br>
+    &lt;!&ndash;<input type="text"  class="form-control" th:value="${zd.zdType}"  name="zdType" width="100"  placeholder="账单类型">&ndash;&gt;<br>
 
-    账单时效<input class='Wdate' type="text"  name="startdate" th:value="${zd.startdate}" />至
-            <input class='Wdate' type="text"  name="entdate" th:value="${zd.entdate}"  /><br>
+    账单时效:<span th:text="${zd.startdate}"></span>至
+             <span th:text="${zd.entdate}"></span><br>
+
+    &lt;!&ndash;<input class='Wdate' type="text"  name="startdate" th:value="${zd.startdate}" />至
+    <input class='Wdate' type="text"  name="entdate" th:value="${zd.entdate}"  /><br>
+&ndash;&gt;
+
+    预计付款时间:<span th:text="${zd.zfdate}"></span><br>
+      &lt;!&ndash;<input class='Wdate' type="text"  name="zfdate" th:value="${zd.zfdate}"  /><br>
+&ndash;&gt;
 
 
-    预计付款时间<input class='Wdate' type="text"  name="zfdate" th:value="${zd.zfdate}"  /><br>
+    &lt;!&ndash; <input class='Wdate' type="text" name="createTime" onclick="WdatePicker  ({dateFmt:'yyyy-MM-dd'})"> &ndash;&gt;-->
+
+    <table>
+        <tr>
+            <td>账单房号:</td>
+            <td><span th:text="${zd.room}"></span><br></td>
+        </tr>
+
+        <tr>
+            <td>
+                 <br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>账单金额:</td>
+            <td><span th:text="${zd.zdmoney}"></span></td>
+            <td>账单类型:</td>
+            <td><span th:text="${zd.zdType}"></span></td>
+        </tr>
+
+        <tr>
+            <td>
+                <br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>账单时效:</td>
+            <td>
+                <span th:text="${zd.startdate}"></span>至
+                <span th:text="${zd.entdate}"></span><br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>预计付款时间:</td>
+            <td><span th:text="${zd.zfdate}"></span></td>
+        </tr>
+    </table>
 
 
 
-    <!-- <input class='Wdate' type="text" name="createTime" onclick="WdatePicker  ({dateFmt:'yyyy-MM-dd'})"> -->
+
+
+
 </form>
 </body>
 

@@ -38,4 +38,10 @@ public class SfkServiceImpl implements  SfkService{
     public void updateDz(ZdModel zd) {
         sfkMapper.updateDz(zd);
     }
+
+    @Override
+    public Double showss() {
+        Double ds=sfkMapper.showss();
+        return ds;
+    }
 }

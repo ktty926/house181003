@@ -18,4 +18,8 @@ public interface SfkMapper {
     ZdModel totk(Integer szId);
 
     void updateDz(ZdModel zd);
+
+
+    @Select("select sum(zdMoney) from fukuang where dsz=2 and lszt=2")
+    Double showss();
 }

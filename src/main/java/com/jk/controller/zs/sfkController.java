@@ -5,6 +5,7 @@ import com.jk.model.zs.ZdModel;
 import com.jk.service.zs.SfkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,8 +30,11 @@ public class sfkController {
     }
 
     @RequestMapping("toshow")
-    public String show(){
-        System.out.println("2222");
+    public String show(Model model){
+        Double ds=sfkService.showss();
+
+        model.addAttribute("ds",ds);
+
         return "show";
     }
 

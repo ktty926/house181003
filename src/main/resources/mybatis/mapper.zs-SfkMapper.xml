@@ -14,7 +14,12 @@
 
 
     <select id="finddz"  resultType="ZdModel">
-        select * from fukuang where dsz=2 and lszt=2
+        select szId,room, sfren,
+        zdMoney, zdType,
+        sfDate, zfFangshi,
+        dsz, lszt, beizhu,
+        date_format(zfdate, '%Y-%m-%d') as zfdate, startdate,
+        entdate, sfmoney from fukuang where dsz=2 and lszt=2
         <if test="cxname!=null and cxname!='' and zt==1">
             and room = #{cxname}
         </if>
@@ -25,8 +30,8 @@
       </select>
 
     <update id="updateDz">
-        update fukuang set zdmoney=#{zdmoney},zfFangShi=#{zfFangShi},
-        zfdate=#{zfdate},beizhu=#{beizhu} where szId=#{szId}
+        update fukuang set dsz=1, sfmoney=#{sfmoney},zfFangShi=#{zfFangShi},
+        zfdate=str_to_date(#{zfdate}, '%Y-%m-%d'),beizhu=#{beizhu} where szId=#{szId}
 
     </update>
 </mapper>

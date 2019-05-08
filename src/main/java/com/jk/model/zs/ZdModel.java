@@ -15,9 +15,11 @@ public class ZdModel {
     private Double zdmoney; // double 账单金额
     private String zdType;   //String 账单类型
 
+    private Double sfmoney;   //实付金额
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date sfDate;  //date  收付款时间
+    private Date sfDate;  //date  预计收付款时间
     private Integer zfFangShi; // int  支付方式  1 代表现金  2 代表支付宝 3 代表微信 4 代表转账
     private Integer dsz;   // int   带收支状态   1 .待收状态 2.待支状态
     private Integer lszt; // int    带流水状态  1 .待收流水收入状态 2.待支出流水收入状态

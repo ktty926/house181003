@@ -15,4 +15,6 @@ public interface SfkService {
     ZdModel totk(Integer szId);
 
     void updateDz(ZdModel zd);
+
+    Double showss();
 }

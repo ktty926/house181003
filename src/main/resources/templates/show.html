@@ -1,8 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <!--<style>
+
+        #tcform {
+            position: absolute;
+            right: 200px;
+            top: 15px;
+            width: 80px;
+            height: 30px;
+        }
+
+        #cxname {
+            position: absolute;
+            left: 568px;
+            top: 119px;
+            width: 148px;
+            height: 30px;
+        }
+
+    </style>-->
 
 </head>
 
@@ -24,15 +44,25 @@
 <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
 
 <body>
+        <div style="margin-left:200px">
+
         <form id="tcform">
-            <select id="zt">
+            <select style="width:10%" class="form-control" id="zt">
                 <option value="0">--请选择--</option>
                 <option value="1">账单房号</option>
                 <option value="2">收款人</option>
             </select>
-            <input type="text" class="form-control"  id="cxname">
+            <br>
+            <input type="text" style="width:35%" class="form-control"  id="cxname">
+            <br>
             <button type="button" class="btn btn-default"  onclick="search()">搜索</button>
         </form>
+
+        </div>
+
+
+
+        待支总额:<span th:text="${ds}"></span>
 
     <table id="redisTab"></table>
 </body>
@@ -123,9 +153,9 @@
             //sortName:'proPrice',
             //sortOrder:'desc',
             //前台--搜索框
-            search:true,
+            //search:true,
             //启动回车键做搜索功能
-            searchOnEnterKey:true,
+            //searchOnEnterKey:true,
             //分页方式   后台请求的分页方式
             sidePagination:'server',
             pagination: true,                   //是否显示分页（*）
