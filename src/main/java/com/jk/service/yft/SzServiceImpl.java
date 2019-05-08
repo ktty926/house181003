@@ -35,9 +35,21 @@ public class SzServiceImpl implements SzService {
     }
 
     @Override
-    public HashMap<String, Object> lsfind(Integer start, Integer pageSize,ZdModel zd) {
-        Long count = mapper.lsfindCount();
-        List<ZdModel> list=mapper.lsfind(start,pageSize,zd.getMindate(),zd.getMaxdate());
+    public HashMap<String, Object> lsfind(Integer start, Integer pageSize,ZdModel zd,Integer tcse) {
+
+
+        HashMap<String , Object> hash=new HashMap<>();
+        hash.put("tcse",tcse);
+        hash.put("start",start);
+        hash.put("pageSize",pageSize);
+        hash.put("mindate",zd.getMindate());
+        hash.put("maxdate",zd.getMaxdate());
+        hash.put("room",zd.getRoom());
+        hash.put("zdType",zd.getZdType());
+        hash.put("zfFangShi",zd.getZfFangShi());
+        hash.put("lszt",zd.getLszt());
+        Long count = mapper.lsfindCount(hash);
+        List<ZdModel> list=mapper.lsfind(hash);
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("rows",list);
         map.put("total",count);

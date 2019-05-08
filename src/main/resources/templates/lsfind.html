@@ -18,10 +18,27 @@
 <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
 <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
 <body>
-<form id="tcform">
-<input type="date" id="mindate">至<input type="date" id="maxdate">
-    <button type="button" class="btn btn-default" onclick="searcha()">搜索</button>
-</form>
+
+    <div style="margin-top: 40px">
+            <form id="tcform">
+                <table>
+                    <tr>
+                        <td style='width:15%'></td>
+                        <td  style='width:15%'> <select id="tcse"   class='form-control' onchange="cha()">
+                            <option value="0">无条件</option>
+                            <option value="1">付款方式</option>
+                            <option value="2">资金流向</option>
+                            <option value="3">账单类型</option>
+                            <option value="4">账单房号</option>
+                        </select></td>
+                        <td style='width:15%'><span id="tcspan"><input type="text"   class='form-control' id="zz"/></span></td>
+                        <td style='width:18%'><input type="date" style="width:40%" id="mindate">至<input type="date" id="maxdate"></td>
+                        <td style='width:15%'><button type="button" class="btn btn-default" onclick="searcha()">搜索</button></td>
+                    </tr>
+                </table>
+            </form>
+
+    </div>
 <br>
 收入：<span id="srspan"></span>
 支出：<span id="zcspan"></span>
@@ -124,6 +141,11 @@
                     */
                     "pageSize":params.limit,
                     "start":params.offset,
+                    "tcse":$("#tcse").val(),
+                    'zfFangShi':$("#zfFangShi").val(),
+                    'zdType':$("#zdType").val(),
+                    'lszt':$("#lszt").val(),
+                    'room':$("#room").val(),
                     'mindate':$("#mindate").val(),
                     'maxdate':$("#maxdate").val(),
                     //"pro_name":params.search,//精确搜索产品名称
@@ -147,11 +169,33 @@
     function  searcha(){
         $("#lsfindtable").bootstrapTable("refresh",{
             "query":{
+                "tcse":$("#tcse").val(),
+                'zfFangShi':$("#zfFangShi").val(),
+                'zdType':$("#zdType").val(),
+                'lszt':$("#lszt").val(),
+                'room':$("#room").val(),
                 'mindate':$("#mindate").val(),
                 'maxdate':$("#maxdate").val(),
             }
         });
 
+    }
+    function cha(){
+        var str=$("#tcse").val();
+        if(str==1){
+            $("#tcspan").html("<select class='form-control' id='zfFangShi'><option value='1'>现金</option><option value='2'>支付宝</option><option value='3'>微信</option><option value='4'>转账</option></select>")
+        }
+        if(str==2){
+            $("#tcspan").html("<select class='form-control' id='lszt'><option value='1'>收入</option><option value='2'>支出</option></select>")
+        }
+        if(str==3){
+            $("#tcspan").html("<select  class='form-control' id='zdType'><option value='租金'>租金</option><option value='押金'>押金</option>" +
+                "<option value='水费'>水费</option><option value='电费'>电费</option><option value='维修费'>维修费</option>" +
+                "<option value='物业费'>物业费</option><option value='看家费'>看家费</option></select>")
+        }
+        if(str==4){
+            $("#tcspan").html("<input  type='text' class='form-control' id='room'>")
+        }
     }
     function findgd(szId){
 

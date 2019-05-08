@@ -16,7 +16,10 @@
         </td>
     </tr>
     <tr>
-        <td>账单金额：<span th:text="${zd.zdmoney}"></span></td>
+        <td>账单金额：<span >
+            <font th:if="${zd.lszt == 1}" th:text="'+'+${zd.zdmoney}" color="red"></font>
+            <font th:if="${zd.lszt != 1}" th:text="'-'+${zd.zdmoney}" color="#7cfc00"></font>
+        </span></td>
         <td>&nbsp;&nbsp;&nbsp;付款方：<span th:text="${zd.sfren}"></span></td>
 
     </tr>
@@ -26,7 +29,10 @@
         </td>
     </tr>
     <tr>
-        <td>实付金额： <span th:text="${zd.sfmoney}"></span></td>
+        <td>实付金额： <span >
+            <font th:if="${zd.lszt == 1}" th:text="'+'+${zd.sfmoney}" color="red"></font>
+            <font th:if="${zd.lszt != 1}" th:text="'-'+${zd.sfmoney}" color="#7cfc00"></font>
+        </span></td>
         <td>&nbsp;&nbsp;&nbsp;账单类型： <<span th:text="${zd.zdType}"></span></td>
 
     </tr>
@@ -42,7 +48,7 @@
     </tr>
 </table>
 <br>
-
+<hr size="2">
 <br>
 <table>
     <tr>

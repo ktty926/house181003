@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -18,9 +19,8 @@ public interface SzMapper {
 
     void updatezd(ZdModel zd);
 
-    Long lsfindCount();
+    Long lsfindCount(HashMap<String, Object> hash);
 
-    List<ZdModel> lsfind(@Param("start") Integer start,@Param("pageSize") Integer pageSize,@Param("mindate")String mindate,@Param("maxdate")String maxdate);
     //求已确认支出
     @Select("select sum(zdmoney) from fukuang where dsz=1 and lszt=2")
     Double findzc();
@@ -31,4 +31,6 @@ public interface SzMapper {
     void addls(ZdModel zd);
     @Select("select sum(zdmoney) from fukuang where dsz=2 and lszt=1")
     Double getds();
+
+    List<ZdModel> lsfind(HashMap<String, Object> hash);
 }

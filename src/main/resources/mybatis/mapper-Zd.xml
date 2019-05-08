@@ -44,12 +44,26 @@
     </update>
     <select id="lsfindCount" resultType="Long">
         select count(1) from  fukuang where dsz=1
-        <if test="mindate!=null and mindate!='' ">
+        <if test="mindate!=null and mindate!=''  and tcse!=0">
             and zfdate &gt;=str_to_date(#{mindate}, '%Y-%m-%d')
         </if>
-        <if test="maxdate!=null and maxdate!='' ">
+        <if test="maxdate!=null and maxdate!='' and tcse!=0 ">
             and zfdate &lt;=str_to_date(#{maxdate}, '%Y-%m-%d')
         </if>
+        <if test="room!=null and room != '' and tcse!=0">
+            and room like concat('%',concat(#{room},'%'))
+        </if>
+        <if test="zdType!=null and zdType != '' and tcse!=0">
+            and zdType= #{zdType}
+        </if>
+        <if test="zfFangShi!=null and zfFangShi != 0 and tcse!=0">
+            and zfFangShi= #{zfFangShi}
+        </if>
+        <if test="lszt!=null and lszt != 0 and tcse!=0">
+            and lszt= #{lszt}
+        </if>
+
+
     </select>
     <select id="lsfind" resultType="com.jk.model.yft.ZdModel">
          select szId,room, sfren,
@@ -58,12 +72,25 @@
           dsz, lszt, beizhu,
            date_format(zfdate, '%Y-%m-%d') as zfdate, startdate,
             entdate, sfmoney from fukuang where dsz=1
-             <if test="mindate!=null and mindate!='' ">
+             <if test="mindate!=null and mindate!='' and tcse!=0">
              and zfdate &gt;=str_to_date(#{mindate}, '%Y-%m-%d')
              </if>
-            <if test="maxdate!=null and maxdate!='' ">
+            <if test="maxdate!=null and maxdate!=''  and tcse!=0">
             and zfdate &lt;=str_to_date(#{maxdate}, '%Y-%m-%d')
             </if>
+            <if test="room!=null and room != ''  and tcse!=0">
+             and room like concat('%',concat(#{room},'%'))
+            </if>
+            <if test="zdType!=null and zdType != '' and tcse!=0">
+            and zdType= #{zdType}
+            </if>
+            <if test="zfFangShi!=null and zfFangShi != 0 and tcse!=0">
+            and zfFangShi= #{zfFangShi}
+            </if>
+            <if test="lszt!=null and lszt != 0 and tcse!=0">
+            and lszt= #{lszt}
+            </if>
+
              limit #{start},#{pageSize}
     </select>
     <insert id="addls" parameterType="com.jk.model.yft.ZdModel">

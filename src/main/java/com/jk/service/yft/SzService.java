@@ -11,7 +11,7 @@ public interface SzService {
 
     void updatezd(ZdModel zd);
 
-    HashMap<String, Object> lsfind(Integer start, Integer pageSize,ZdModel zd);
+    HashMap<String, Object> lsfind(Integer start, Integer pageSize,ZdModel zd,Integer tcse);
 
     Double findzcByZt();
 

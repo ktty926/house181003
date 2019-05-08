@@ -29,10 +29,10 @@ public class SzController {
     //收支流水查询
     @RequestMapping("lsfind")
     @ResponseBody
-    public HashMap<String , Object> lsfind(Integer start,Integer pageSize,ZdModel zd){
+    public HashMap<String , Object> lsfind(Integer start,Integer pageSize,ZdModel zd,Integer tcse){
 
 
-        return service.lsfind(start,pageSize,zd);
+        return service.lsfind(start,pageSize,zd,tcse);
     }
     @RequestMapping("tofindds")
     public String tofindds(Model model){
