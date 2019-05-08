@@ -8,18 +8,52 @@
 
 <form method="post" id="dsform">
     <input type="hidden" th:value="${zd.szId}" name="szId">
-    实收金额<input type="text" class="form-control" th:value="${zd.zdmoney}" name="sfmoney">
-    账单金额：<span th:text="${zd.zdmoney}"></span>
-    <br>
-    收款方式 ：<select name="zfFangShi">
-    <option value="1">现金</option>
-    <option value="2">支付宝</option>
-    <option value="3">微信</option>
-    <option value="4">转账</option>
+    <table>
+        <tr>
+            <td>实收金额:</td>
+            <td>
+                <input type="text" style="width:45%" class="form-control"  th:value="${zd.zdmoney}"  name="sfmoney"  placeholder="实收金额">
+            </td>
 
-</select>
-    收款时间：<input type="text" id="sj" th:value="${zd.zfdate}"  name="zfdate"/>
-    <br>
-    备注：<textarea name="beizhu" rows="5" cols="60"></textarea>
 
+
+            <td>应收金额:</td>
+            <td>
+                <span th:text="${zd.zdmoney}"></span>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>付款方式:</td>
+            <td>
+                <select class="form-control" name="zfFangShi">
+                    <option value="0" selected>现金
+                    <option value="1">现金
+                    <option value="2">支付宝
+                    <option value="3">微信
+                    <option value="4">转账
+                </select>
+
+            </td>
+
+            <td>付款时间:</td>
+            <td>
+                <input class='form-control' type="text"  name="zfdate" th:value="${zd.zfdate}"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /><br>
+
+            </td>
+
+        </tr>
+
+
+
+    </table>
+
+    <tr>
+        <td>备注:</td>
+        <td>
+            <textarea  class="form-control" name="beizhu" rows="5" cols="45"></textarea><br>
+        </td>
+
+    </tr>
 </form>

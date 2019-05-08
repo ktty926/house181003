@@ -61,6 +61,8 @@ public class SzController {
     public ModelAndView tofindone(Integer szId){
         ModelAndView mv = new ModelAndView();
         ZdModel zd=service.findOneById(szId);
+        SimpleDateFormat sim =new SimpleDateFormat("yyyy-MM-dd");
+        zd.setSfString(sim.format(zd.getSfDate()));
         mv.setViewName("findone");
         mv.addObject("zd",zd);
         return mv;

@@ -18,15 +18,22 @@
 <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
 <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
 
-<body><form id="tcform">
-    <select id="zt">
-        <option value="0">--请选择--</option>
-        <option value="1">账单房号</option>
-        <option value="2">收款人</option>
-    </select>
-    <input type="text" class="form-control"  id="cxname">
-    <button type="button" class="btn btn-default" onclick="search()">搜索</button>
-</form>
+<body>
+<div style="margin-left:200px">
+
+    <form id="tcform">
+        <select style="width:10%" class="form-control" id="zt">
+            <option value="0">--请选择--</option>
+            <option value="1">账单房号</option>
+            <option value="2">收款人</option>
+        </select>
+        <br>
+        <input type="text" style="width:35%" class="form-control"  id="cxname">
+        <br>
+        <button type="button" class="btn btn-default"  onclick="search()">搜索</button>
+    </form>
+
+</div>
 待收总额：<span th:text="${ds}"></span>
 <table id="finddstable"></table>
 <input type="button" value="弹框" onclick="tankuang()">
@@ -96,9 +103,7 @@
             //sortName:'proPrice',
             //sortOrder:'desc',
             //前台--搜索框
-            search:true,
-            //启动回车键做搜索功能
-            searchOnEnterKey:true,
+
             //分页方式   后台请求的分页方式
             sidePagination:'server',
             pagination: true,                   //是否显示分页（*）
